@@ -9,6 +9,7 @@ public struct Image: ViewComponent {
         self.init(UIImage(named: imageName)!)
     }
 
+    @available(iOS 13.0, *)
     public init(systemName: String, withConfiguration configuration: UIImage.Configuration? = nil) {
         self.init(UIImage(systemName: systemName, withConfiguration: configuration) ?? UIImage())
     }

@@ -11,7 +11,7 @@ public struct TappableViewConfiguration {
 
     // hook before the actual onTap is called
     public var didTap: ((TappableView) -> Void)?
-
+    
     public init(onHighlightChanged: ((TappableView, Bool) -> Void)? = nil, didTap: ((TappableView) -> Void)? = nil) {
         self.onHighlightChanged = onHighlightChanged
         self.didTap = didTap
@@ -26,6 +26,8 @@ open class TappableView: ComponentView {
         $0.numberOfTapsRequired = 2
     }
     lazy var longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(didLongPress))
+    
+    @available(iOS 13.4, *)
     lazy var contextMenuInteraction = UIContextMenuInteraction(delegate: self)
 
     public var previewBackgroundColor: UIColor?
@@ -75,9 +77,15 @@ open class TappableView: ComponentView {
         }
     }
 
+    private var _previewProvider: (() -> UIViewController?)?
+    
+    @available(iOS 13.4, *)
     public var previewProvider: (() -> UIViewController?)? {
-        didSet {
-            if previewProvider != nil || contextMenuProvider != nil {
+        get {
+            _previewProvider
+        }
+        set {
+            if _previewProvider != nil || contextMenuProvider != nil {
                 addInteraction(contextMenuInteraction)
             } else {
                 removeInteraction(contextMenuInteraction)
@@ -85,10 +93,21 @@ open class TappableView: ComponentView {
         }
     }
 
-    public var onCommitPreview: ((UIContextMenuInteractionCommitAnimating) -> Void)?
+    private var _onCommitPreview: Any?
+    
+    @available(iOS 13.4, *)
+    public var onCommitPreview: ((UIContextMenuInteractionCommitAnimating) -> Void)? {
+        get { _onCommitPreview as? ((UIContextMenuInteractionCommitAnimating) -> Void) }
+        set { _onCommitPreview = newValue }
+    }
 
+    private var _contextMenuProvider: Any?
+    
+    @available(iOS 13.4, *)
     public var contextMenuProvider: (() -> UIMenu?)? {
-        didSet {
+        get { _contextMenuProvider as? (() -> UIMenu?) }
+        set {
+            _contextMenuProvider = newValue
             if previewProvider != nil || contextMenuProvider != nil {
                 addInteraction(contextMenuInteraction)
             } else {
@@ -98,6 +117,7 @@ open class TappableView: ComponentView {
     }
 
     private var _pointerStyleProvider: Any?
+    
     @available(iOS 13.4, *)
     public var pointerStyleProvider: (() -> UIPointerStyle?)? {
         get { _pointerStyleProvider as? () -> UIPointerStyle? }
@@ -167,6 +187,7 @@ extension TappableView: UIPointerInteractionDelegate {
     }
 }
 
+@available(iOS 13.4, *)
 extension TappableView: UIContextMenuInteractionDelegate {
     public func contextMenuInteraction(_ interaction: UIContextMenuInteraction, configurationForMenuAtLocation location: CGPoint) -> UIContextMenuConfiguration? {
         if let previewProvider = previewProvider {
