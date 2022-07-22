@@ -10,7 +10,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'UIComponent-flow'
-  s.version          = '1.0.0'
+  s.version          = '1.0.1'
   s.summary          = 'UIComponent 小修改'
   s.module_name = "UIComponent"
 # This description is used to generate tags and improve search results.
@@ -34,7 +34,7 @@ TODO: Add long description of the pod here.
 #  s.swift_version = '5'
   s.source_files = 'Sources/**/*'
 
-  s.dependency 'BaseToolbox'
+  s.dependency 'BaseToolbox', '~> 1.0.2'
 
 end
 
