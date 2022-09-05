@@ -1,7 +1,7 @@
 #
-# pod trunk push UIComponent-flow.podspec --allow-warnings
+# pod trunk push UIComponent-flow.podspec --allow-warnings --sources='https://github.com/CocoaPods/Specs.git'
 
-# Be sure to run `pod lib lint UIComponent-flow.podspec --allow-warnings' to ensure this is a
+# Be sure to run `pod lib lint UIComponent-flow.podspec --allow-warnings --sources='https://github.com/CocoaPods/Specs.git' ' to ensure this is a
 # valid spec before submitting.
 #
 # Any lines starting with a # are optional, but their use is encouraged
@@ -10,7 +10,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'UIComponent-flow'
-  s.version          = '1.0.2'
+  s.version          = '1.0.3'
   s.summary          = 'UIComponent 小修改'
   s.module_name = "UIComponent"
 # This description is used to generate tags and improve search results.
@@ -34,7 +34,7 @@ TODO: Add long description of the pod here.
 #  s.swift_version = '5'
   s.source_files = 'Sources/**/*'
 
-  s.dependency 'BaseToolbox', '~> 1.0.2'
+  s.dependency 'BaseToolbox', '~> 1.0.4'
 
 end
 
