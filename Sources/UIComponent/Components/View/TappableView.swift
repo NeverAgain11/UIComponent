@@ -21,14 +21,14 @@ public struct TappableViewConfiguration {
 open class TappableView: ComponentView {
     public var configuration: TappableViewConfiguration?
 
-    lazy var tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTap))
-    lazy var doubleTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didDoubleTap)).then {
+    public private(set) lazy var tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTap))
+    public private(set) lazy var doubleTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didDoubleTap)).then {
         $0.numberOfTapsRequired = 2
     }
-    lazy var longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(didLongPress))
     
+    public private(set) lazy var longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(didLongPress))
     @available(iOS 13.4, *)
-    lazy var contextMenuInteraction = UIContextMenuInteraction(delegate: self)
+    public private(set) lazy var contextMenuInteraction = UIContextMenuInteraction(delegate: self)
 
     public var previewBackgroundColor: UIColor?
     public var onTap: ((TappableView) -> Void)? {
@@ -54,7 +54,6 @@ open class TappableView: ComponentView {
     public var onDoubleTap: ((TappableView) -> Void)? {
         didSet {
             if onDoubleTap != nil {
-                tapGestureRecognizer.require(toFail: doubleTapGestureRecognizer)
                 addGestureRecognizer(doubleTapGestureRecognizer)
             } else {
                 removeGestureRecognizer(doubleTapGestureRecognizer)
