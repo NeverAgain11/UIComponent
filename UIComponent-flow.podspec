@@ -10,7 +10,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'UIComponent-flow'
-  s.version          = '1.0.1'
+  s.version          = '1.0.2'
   s.summary          = 'UIComponent 小修改'
   s.module_name = "UIComponent"
 # This description is used to generate tags and improve search results.
