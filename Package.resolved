@@ -3,11 +3,11 @@
     "pins": [
       {
         "package": "BaseToolbox",
-        "repositoryURL": "http://github.com/NeverAgain11/BaseToolbox",
+        "repositoryURL": "https://github.com/lkzhao/BaseToolbox",
         "state": {
           "branch": null,
-          "revision": "1940b9170cece7926abbe811ec0590e14f0f99f6",
-          "version": null
+          "revision": "2962cea0ff0725629c0c90cddca1398faf2f807a",
+          "version": "0.1.14"
         }
       }
     ]
