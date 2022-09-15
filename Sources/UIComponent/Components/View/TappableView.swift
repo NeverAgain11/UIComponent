@@ -41,7 +41,7 @@ open class TappableView: ComponentView {
         }
     }
 
-    public var onLongPress: ((TappableView) -> Void)? {
+    public var onLongPress: ((TappableView, UILongPressGestureRecognizer) -> Void)? {
         didSet {
             if onLongPress != nil {
                 addGestureRecognizer(longPressGestureRecognizer)
@@ -169,9 +169,7 @@ open class TappableView: ComponentView {
     }
 
     @objc open func didLongPress() {
-        if longPressGestureRecognizer.state == .began {
-            onLongPress?(self)
-        }
+        onLongPress?(self, longPressGestureRecognizer)
     }
 }
 
