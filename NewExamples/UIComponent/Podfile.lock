@@ -1,0 +1,23 @@
+PODS:
+  - BaseToolbox (1.0.4)
+  - UIComponent-flow (1.0.4):
+    - BaseToolbox (~> 1.0.4)
+
+DEPENDENCIES:
+  - UIComponent-flow (from `../..`)
+
+SPEC REPOS:
+  https://github.com/CocoaPods/Specs.git:
+    - BaseToolbox
+
+EXTERNAL SOURCES:
+  UIComponent-flow:
+    :path: "../.."
+
+SPEC CHECKSUMS:
+  BaseToolbox: bcc0dadeab67021b76928d27a2ba7c3dfb71f50a
+  UIComponent-flow: af8aede83b58e8b9fda1f3fac26fdd5f027efcf2
+
+PODFILE CHECKSUM: 615062ad66153d8c4fde98c173f1bffcd29d23d5
+
+COCOAPODS: 1.11.3
