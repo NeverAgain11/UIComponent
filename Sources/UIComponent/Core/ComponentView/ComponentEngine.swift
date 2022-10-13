@@ -3,6 +3,10 @@
 import BaseToolbox
 import UIKit
 
+public protocol ComponentReloadDelegate: AnyObject {
+    func componentViewShouldReload(_ view: ComponentDisplayableView) -> Bool
+}
+
 /// Main class that powers rendering components
 ///
 /// This object manages a ``ComponentDisplayableView`` and handles rendering the component
@@ -10,6 +14,7 @@ import UIKit
 public class ComponentEngine {
     // force view update to be performed within a UIView.performWithoutAnimation block
     public static var disableUpdateAnimation: Bool = false
+    public static weak var reloadDelegate: ComponentReloadDelegate?
     
     /// view that is managed by this engine.
     weak var view: ComponentDisplayableView?
@@ -34,13 +39,9 @@ public class ComponentEngine {
     var reloadCount = 0
     var isRendering = false
     var isReloading = false
-    var allowReload = true {
-        didSet {
-            guard allowReload != oldValue else { return }
-            if allowReload, needsReload {
-                view?.setNeedsLayout()
-            }
-        }
+    var allowReload: Bool {
+        guard let view, let reloadDelegate = Self.reloadDelegate else { return true }
+        return reloadDelegate.componentViewShouldReload(view)
     }
 
     /// visible frame insets. this will be applied to the visibleFrame that is used to retrieve views for the view port.
@@ -66,7 +67,7 @@ public class ComponentEngine {
     var contentView: UIView? {
         didSet {
             oldValue?.removeFromSuperview()
-            if let contentView = contentView {
+            if let contentView {
                 view?.addSubview(contentView)
             }
         }
@@ -169,7 +170,7 @@ public class ComponentEngine {
             reloadCount += 1
             needsReload = false
             isReloading = false
-            if let onFirstReload = onFirstReload, reloadCount == 1 {
+            if let onFirstReload, reloadCount == 1 {
                 onFirstReload()
             }
         }

@@ -10,7 +10,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'UIComponent-flow'
-  s.version          = '1.0.4'
+  s.version          = '1.0.5'
   s.summary          = 'UIComponent 小修改'
   s.module_name = "UIComponent"
 # This description is used to generate tags and improve search results.
@@ -29,7 +29,7 @@ TODO: Add long description of the pod here.
   s.author           = { 'ljk' => 'liujk0723@gmail.com' }
   s.source           = { :git => 'https://github.com/NeverAgain11/UIComponent.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
-
+  
   s.ios.deployment_target = '11.0'
 #  s.swift_version = '5'
   s.source_files = 'Sources/**/*'

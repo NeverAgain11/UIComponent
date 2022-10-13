@@ -3,9 +3,9 @@
 import UIKit
 
 public class AnimatedReloadAnimator: Animator {
-    let transform: CATransform3D
-    let duration: TimeInterval
-    let cascade: Bool
+    public var transform: CATransform3D
+    public var duration: TimeInterval
+    public var cascade: Bool
 
     public init(
         transform: CATransform3D = CATransform3DIdentity,
@@ -40,7 +40,7 @@ public class AnimatedReloadAnimator: Animator {
     }
 
     public override func insert(componentView: ComponentDisplayableView, view: UIView, frame: CGRect) {
-        view.bounds = frame.bounds
+        view.bounds.size = frame.size
         view.center = frame.center
         if componentView.isReloading, componentView.hasReloaded, componentView.bounds.intersects(frame) {
             let offsetTime: TimeInterval = cascade ? TimeInterval(frame.origin.distance(componentView.bounds.origin) / 3000) : 0
